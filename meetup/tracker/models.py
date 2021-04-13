@@ -14,3 +14,12 @@ class Location(models.Model):
     country = models.CharField(max_length=256, blank=True)
     longitude = models.DecimalField(max_digits=12, decimal_places=9, blank=True, null=True)
     latitude = models.DecimalField(max_digits=12, decimal_places=9, blank=True, null=True)
+
+
+class GroupUrlname(models.Model):
+    """
+    Model that represents a Group urlname in the Meetup.
+    The urlnames must be added by administrators to track groups.
+    """
+
+    urlname = models.CharField(max_length=256, blank=True)

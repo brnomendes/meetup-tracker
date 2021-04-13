@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from tracker.models import Location
+from tracker.models import GroupUrlname, Location
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -10,4 +10,14 @@ class LocationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Location
+        fields = "__all__"
+
+
+class GroupUrlnameSerializer(serializers.ModelSerializer):
+    """
+    Serializer for GroupUrlname Model.
+    """
+
+    class Meta:
+        model = GroupUrlname
         fields = "__all__"
