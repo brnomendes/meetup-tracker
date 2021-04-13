@@ -1,0 +1,51 @@
+- description: description 0
+  link: link 0
+  location:
+    address_1: address_1 99
+    address_2: address_2 99
+    city: city 99
+    country: country 99
+    latitude: '99.000000000'
+    longitude: '99.000000000'
+    name: name 99
+    state: state 99
+  member_count: 10
+  name: name 0
+  photo_link: photo_link 0
+  status: status 0
+  urlname:
+    urlname: Python Group 0
+- description: description 1
+  link: link 1
+  location:
+    address_1: address_1 99
+    address_2: address_2 99
+    city: city 99
+    country: country 99
+    latitude: '99.000000000'
+    longitude: '99.000000000'
+    name: name 99
+    state: state 99
+  member_count: 10
+  name: name 1
+  photo_link: photo_link 1
+  status: status 1
+  urlname:
+    urlname: Python Group 1
+- description: description 2
+  link: link 2
+  location:
+    address_1: address_1 99
+    address_2: address_2 99
+    city: city 99
+    country: country 99
+    latitude: '99.000000000'
+    longitude: '99.000000000'
+    name: name 99
+    state: state 99
+  member_count: 10
+  name: name 2
+  photo_link: photo_link 2
+  status: status 2
+  urlname:
+    urlname: Python Group 2

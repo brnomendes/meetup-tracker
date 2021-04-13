@@ -1,7 +1,7 @@
 from rest_framework import generics
 
-from tracker.models import Location
-from tracker.serializers import LocationSerializer
+from tracker.models import Location, MeetupGroup
+from tracker.serializers import LocationSerializer, MeetupGroupSerializer
 
 
 class LocationList(generics.ListAPIView):
@@ -11,3 +11,12 @@ class LocationList(generics.ListAPIView):
 
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
+
+
+class MeetupGroupList(generics.ListAPIView):
+    """
+    View that list MeetupGroup models.
+    """
+
+    queryset = MeetupGroup.objects.all()
+    serializer_class = MeetupGroupSerializer
