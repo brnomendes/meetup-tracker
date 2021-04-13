@@ -43,7 +43,9 @@ class MeetupGroup(models.Model):
     photo_link = models.CharField(max_length=1024, blank=True)
     member_count = models.IntegerField(blank=True, null=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE, null=False)
-    urlname = models.OneToOneField(GroupUrlname, on_delete=models.CASCADE, null=False)
+    urlname = models.OneToOneField(
+        GroupUrlname, related_name="group", on_delete=models.CASCADE, null=False
+    )
 
     def __str__(self) -> str:
         return self.name
