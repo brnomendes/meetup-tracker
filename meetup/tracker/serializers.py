@@ -1,7 +1,7 @@
 from conftest import location
 from rest_framework import serializers
 
-from tracker.models import GroupUrlname, Location, MeetupGroup
+from tracker.models import GroupUrlname, Location, MeetupEvent, MeetupGroup
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -34,4 +34,14 @@ class MeetupGroupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MeetupGroup
+        fields = "__all__"
+
+
+class MeetupEventSerializer(serializers.ModelSerializer):
+    """
+    Serializer for MeetupEvent Model.
+    """
+
+    class Meta:
+        model = MeetupEvent
         fields = "__all__"

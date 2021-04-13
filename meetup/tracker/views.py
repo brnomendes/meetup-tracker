@@ -1,7 +1,9 @@
-from rest_framework import generics
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import generics, status
+from rest_framework.response import Response
 
 from tracker.models import Location, MeetupGroup
-from tracker.serializers import LocationSerializer, MeetupGroupSerializer
+from tracker.serializers import LocationSerializer, MeetupEventSerializer, MeetupGroupSerializer
 
 
 class LocationList(generics.ListAPIView):
@@ -20,3 +22,19 @@ class MeetupGroupList(generics.ListAPIView):
 
     queryset = MeetupGroup.objects.all()
     serializer_class = MeetupGroupSerializer
+
+
+class MeetupEventList(generics.ListAPIView):
+    """
+    View that list MeetupEvent models by group id.
+    """
+
+    serializer_class = MeetupEventSerializer
+
+    def get(self, request, pk, *args, **kwargs):
+        try:
+            group = MeetupGroup.objects.get(pk=pk)
+            serialized = self.serializer_class(group.events, many=True)
+            return Response(serialized.data, status.HTTP_200_OK)
+        except ObjectDoesNotExist:
+            return Response("", status.HTTP_404_NOT_FOUND)
