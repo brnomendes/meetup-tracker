@@ -3,12 +3,13 @@
   location:
     address_1: address_1 99
     address_2: address_2 99
-    city: city 99
-    country: country 99
+    city:
+      country:
+        name: Brasil
+      name: Sao Paulo
     latitude: '99.000000000'
     longitude: '99.000000000'
     name: name 99
-    state: state 99
   member_count: 10
   name: name 0
   photo_link: photo_link 0
@@ -20,12 +21,13 @@
   location:
     address_1: address_1 99
     address_2: address_2 99
-    city: city 99
-    country: country 99
+    city:
+      country:
+        name: Brasil
+      name: Sao Paulo
     latitude: '99.000000000'
     longitude: '99.000000000'
     name: name 99
-    state: state 99
   member_count: 10
   name: name 1
   photo_link: photo_link 1
@@ -37,12 +39,13 @@
   location:
     address_1: address_1 99
     address_2: address_2 99
-    city: city 99
-    country: country 99
+    city:
+      country:
+        name: Brasil
+      name: Sao Paulo
     latitude: '99.000000000'
     longitude: '99.000000000'
     name: name 99
-    state: state 99
   member_count: 10
   name: name 2
   photo_link: photo_link 2

@@ -2,7 +2,7 @@ import pytest
 from rest_framework.test import APIClient
 from rest_framework_api_key.models import APIKey
 
-from tracker.models import GroupUrlname, Location, MeetupGroup
+from tracker.models import City, Country, GroupUrlname, Location, MeetupGroup
 
 
 @pytest.fixture
@@ -22,18 +22,29 @@ def api_client(api_key):
 
 @pytest.fixture
 def locations():
-    for i in range(3):
-        location = Location(latitude=i, longitude=i)
-        for attr in ("name", "address_1", "address_2", "city", "state", "country"):
+    country = Country(name="Brasil")
+    country.save()
+    city1 = City(name="Sao Paulo", country=country)
+    city1.save()
+    city2 = City(name="Florianopolis", country=country)
+    city2.save()
+
+    for i, city in enumerate((city1, city2)):
+        location = Location(city=city, latitude=i, longitude=i)
+        for attr in ("name", "address_1", "address_2"):
             setattr(location, attr, f"{attr} {i}")
         location.save()
 
 
 @pytest.fixture
 def location():
+    country = Country(name="Brasil")
+    country.save()
+    city = City(name="Sao Paulo", country=country)
+    city.save()
     i = 99
-    location = Location(latitude=i, longitude=i)
-    for attr in ("name", "address_1", "address_2", "city", "state", "country"):
+    location = Location(city=city, latitude=i, longitude=i)
+    for attr in ("name", "address_1", "address_2"):
         setattr(location, attr, f"{attr} {i}")
     location.save()
     return location

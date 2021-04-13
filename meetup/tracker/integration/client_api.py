@@ -2,7 +2,7 @@ from threading import Thread
 
 import requests
 from django.core.exceptions import ObjectDoesNotExist
-from tracker.models import Location, MeetupGroup
+from tracker.models import City, Country, Location, MeetupGroup
 
 
 class UpdateMeetupGroup(Thread):
@@ -33,7 +33,6 @@ class UpdateMeetupGroup(Thread):
             group = MeetupGroup.objects.get(urlname=self._group_urlname)
         except ObjectDoesNotExist:
             group = MeetupGroup()
-            group.id = self._get_attr(content, "id")
             group.urlname = self._group_urlname
             group.location = Location()
 
@@ -46,14 +45,32 @@ class UpdateMeetupGroup(Thread):
         if key_photo:
             group.photo_link = self._get_attr(key_photo, "photo_link")
 
-        group.location.city = self._get_attr(content, "city")
-        group.location.country = self._get_attr(content, "localized_country_name")
-        group.location.state = self._get_attr(content, "state")
         group.location.latitude = self._get_attr(content, "lat")
         group.location.longitude = self._get_attr(content, "lon")
+        self._update_location_city(
+            group.location,
+            self._get_attr(content, "city"),
+            self._get_attr(content, "localized_country_name"),
+        )
         group.location.save()
 
         group.save()
+
+    def _update_location_city(self, location, city_name, country_name):
+        """
+        Update or create city of location.
+        """
+        try:
+            country = Country.objects.get(name=country_name)
+        except ObjectDoesNotExist:
+            country = Country(name=country_name)
+            country.save()
+        try:
+            city = City.objects.get(name=city_name)
+        except ObjectDoesNotExist:
+            city = City(name=city_name, country=country)
+            city.save()
+        location.city = city
 
     def _get_attr(self, content, attr, default=None):
         """
