@@ -2,7 +2,7 @@ from threading import Thread
 
 import requests
 from django.core.exceptions import ObjectDoesNotExist
-from tracker.models import City, Country, Location, MeetupGroup
+from tracker.models import City, Country, Location, MeetupEvent, MeetupGroup
 
 
 class UpdateMeetupGroup(Thread):
@@ -13,9 +13,9 @@ class UpdateMeetupGroup(Thread):
         self._group_urlname = group_urlname
 
     def run(self):
-        self.update()
+        self.update_group()
 
-    def update(self):
+    def update_group(self):
         """
         Updates the group and events model with the data from the Meetup API.
         """
@@ -23,9 +23,20 @@ class UpdateMeetupGroup(Thread):
         if response.status_code != 200:
             return
         content = response.json()
-        self.update_group_data(content)
+        group = self._update_group_data(content)
+        self._update_events(group)
 
-    def update_group_data(self, content):
+    def _update_events(self, group):
+        """"""
+        response = requests.get(
+            f"{self.API_URL}/{self._group_urlname.urlname}/events?status=past,upcoming"
+        )
+        if response.status_code != 200:
+            return
+        content = response.json()
+        self._update_events_data(group, content)
+
+    def _update_group_data(self, content):
         """
         Receive JSON from the Meetup API and create or update the group model.
         """
@@ -54,6 +65,48 @@ class UpdateMeetupGroup(Thread):
         )
         group.location.save()
 
+        group.save()
+        return group
+
+    def _update_events_data(self, group, content):
+        """
+        Receive JSON from the Meetup API and create or update the event models of a group.
+        """
+        events = []
+        for entry in content:
+            try:
+                event_id = int(self._get_attr(entry, "id"))
+            except ValueError:
+                continue
+
+            try:
+                event = MeetupEvent.objects.get(id=event_id)
+            except ObjectDoesNotExist:
+                event = MeetupEvent(id=event_id)
+
+            event.name = self._get_attr(entry, "name")
+            event.link = self._get_attr(entry, "link", "")
+            event.description = self._get_attr(entry, "description", "")
+            event.status = self._get_attr(entry, "status")
+            event.time = self._get_attr(entry, "time")
+            event.duration = self._get_attr(entry, "duration")
+            event.is_online_event = self._get_attr(entry, "is_online_event")
+
+            venue = self._get_attr(entry, "venue", {})
+            city_name = self._get_attr(venue, "city")
+            country_name = self._get_attr(venue, "localized_country_name")
+            if city_name and country_name:
+                if not event.location:
+                    event.location = Location()
+                event.location.latitude = self._get_attr(venue, "lat")
+                event.location.longitude = self._get_attr(venue, "lon")
+                event.location.address_1 = self._get_attr(venue, "address_1", "")
+                event.location.address_2 = self._get_attr(venue, "address_2", "")
+                self._update_location_city(event.location, city_name, country_name)
+                event.location.save()
+
+            events.append(event)
+        group.events.set(events, bulk=False)
         group.save()
 
     def _update_location_city(self, location, city_name, country_name):

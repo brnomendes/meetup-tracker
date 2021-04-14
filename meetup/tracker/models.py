@@ -21,7 +21,7 @@ class City(models.Model):
     country = models.ForeignKey(Country, related_name="cities", on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.name} {self.country.name}"
+        return f"{self.name} - {self.country.name}"
 
 
 class Location(models.Model):
@@ -35,9 +35,6 @@ class Location(models.Model):
     address_2 = models.CharField(max_length=256, blank=True)
     longitude = models.DecimalField(max_digits=12, decimal_places=9, blank=True, null=True)
     latitude = models.DecimalField(max_digits=12, decimal_places=9, blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.city.name} {self.name}"
 
 
 class GroupUrlname(models.Model):
