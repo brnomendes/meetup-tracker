@@ -59,7 +59,7 @@ class MeetupGroup(models.Model):
     status = models.CharField(max_length=256, blank=True)
     link = models.CharField(max_length=1024, blank=True)
     photo_link = models.CharField(max_length=1024, blank=True)
-    member_count = models.IntegerField(blank=True, null=True)
+    member_count = models.BigIntegerField(blank=True, null=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE, null=False)
     urlname = models.OneToOneField(
         GroupUrlname, related_name="group", on_delete=models.CASCADE, null=False
@@ -78,9 +78,9 @@ class MeetupEvent(models.Model):
     description = models.TextField(blank=True)
     status = models.CharField(max_length=256, blank=True)
     link = models.CharField(max_length=1024, blank=True)
-    time = models.IntegerField(blank=True, null=True)
+    time = models.BigIntegerField(blank=True, null=True)
     is_online_event = models.BooleanField(default=False)
-    duration = models.IntegerField(blank=True, null=True)
+    duration = models.BigIntegerField(blank=True, null=True)
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, blank=True, null=True)
     group = models.ForeignKey(
         MeetupGroup, related_name="events", on_delete=models.CASCADE, null=False
