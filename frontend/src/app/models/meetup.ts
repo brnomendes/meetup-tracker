@@ -31,3 +31,15 @@ export interface MeetupGroup {
   location: Location;
   urlname: GroupUrlname;
 }
+
+export interface MeetupEvent {
+  name: string;
+  description: string;
+  status: string;
+  link: string;
+  time: number;
+  is_online_event: boolean;
+  duration: number;
+  location: Location;
+  group: MeetupGroup;
+}

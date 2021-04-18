@@ -1,0 +1,8 @@
+<p-timeline [value]="events" align="alternate">
+  <ng-template pTemplate="content" let-event>
+    <p-card [header]="event.name" [subheader]="event.time">
+      <p-scrollPanel><div [innerHTML]="event.description"></div></p-scrollPanel>
+      <button pButton label="Read more" class="p-button-text"></button>
+    </p-card>
+  </ng-template>
+</p-timeline>

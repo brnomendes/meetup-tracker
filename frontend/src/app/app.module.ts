@@ -6,13 +6,21 @@ import { AppComponent } from './app.component';
 import { GroupService } from './services/group.service';
 import { WorkspaceComponent } from './components/workspace/workspace.component';
 import { GroupComponent } from './components/group/group.component';
+import { EventsComponent } from './components/events/events.component';
 import { CardModule } from 'primeng/card';
 import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { TimelineModule } from 'primeng/timeline';
+import { SplitterModule } from 'primeng/splitter';
 
 @NgModule({
-  declarations: [AppComponent, WorkspaceComponent, GroupComponent],
+  declarations: [
+    AppComponent,
+    WorkspaceComponent,
+    GroupComponent,
+    EventsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,6 +29,8 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
     DataViewModule,
     ButtonModule,
     ScrollPanelModule,
+    TimelineModule,
+    SplitterModule,
   ],
   providers: [GroupService],
   bootstrap: [AppComponent],

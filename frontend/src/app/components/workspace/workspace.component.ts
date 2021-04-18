@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MeetupGroup } from 'src/app/models/meetup';
+import { MeetupEvent, MeetupGroup } from 'src/app/models/meetup';
 import { GroupService } from 'src/app/services/group.service';
 
 @Component({
@@ -9,10 +9,21 @@ import { GroupService } from 'src/app/services/group.service';
 })
 export class WorkspaceComponent implements OnInit {
   groups: MeetupGroup[] = [];
+  displayEvents: boolean = false;
+  currentEvents: MeetupEvent[] = [];
 
   constructor(private groupService: GroupService) {}
 
   ngOnInit(): void {
-    this.groupService.getGroups().subscribe((g) => (this.groups = g));
+    this.groupService
+      .getGroups()
+      .subscribe((g: MeetupGroup[]) => (this.groups = g));
+  }
+
+  showEvents(groupId: number): void {
+    this.groupService.getEvents(groupId).subscribe((events: MeetupEvent[]) => {
+      this.currentEvents = events;
+      this.displayEvents = true;
+    });
   }
 }

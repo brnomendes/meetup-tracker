@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MeetupGroup } from 'src/app/models/meetup';
 
 @Component({
@@ -8,7 +8,12 @@ import { MeetupGroup } from 'src/app/models/meetup';
 })
 export class GroupComponent implements OnInit {
   @Input() group: MeetupGroup;
+  @Output() showEvents: EventEmitter<number> = new EventEmitter<number>();
   constructor() {}
 
   ngOnInit(): void {}
+
+  openEvents(): void {
+    this.showEvents.emit(this.group.id);
+  }
 }

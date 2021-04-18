@@ -1,5 +1,20 @@
-<p-dataView #dataView [value]="groups" emptyMessage="" layout="grid">
-  <ng-template let-group pTemplate="gridItem">
-    <group class="group" [group]="group"></group>
-  </ng-template>
-</p-dataView>
+<div class="p-grid" style="height: 100%; width: 100%">
+  <div class="p-col">
+    <p-scrollPanel>
+      <p-dataView #dataView [value]="groups" emptyMessage="" layout="grid">
+        <ng-template let-group pTemplate="gridItem">
+          <group
+            class="group"
+            [group]="group"
+            (showEvents)="showEvents($event)"
+          ></group>
+        </ng-template>
+      </p-dataView>
+    </p-scrollPanel>
+  </div>
+  <div class="p-col" *ngIf="displayEvents">
+    <p-scrollPanel>
+      <events [events]="currentEvents"></events>
+    </p-scrollPanel>
+  </div>
+</div>
