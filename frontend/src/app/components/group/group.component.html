@@ -12,6 +12,11 @@
   <ng-template pTemplate="footer">
     <p-button label="Open" icon="pi pi-check"></p-button>
     <p-button
+      label="Update"
+      icon="pi pi-check"
+      (click)="updateGroupData()"
+    ></p-button>
+    <p-button
       label="Events"
       icon="pi pi-times"
       styleClass="p-button-secondary"

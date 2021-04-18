@@ -18,4 +18,8 @@ export class GroupService {
   getEvents(groupId: number): Observable<MeetupEvent[]> {
     return this.httpClient.get<MeetupEvent[]>(`${this.url}/${groupId}/events/`);
   }
+
+  updateGroup(groupId: number): Observable<string> {
+    return this.httpClient.get<string>(`${this.url}/${groupId}/update/`);
+  }
 }

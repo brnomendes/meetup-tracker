@@ -10,20 +10,34 @@ import { GroupService } from 'src/app/services/group.service';
 export class WorkspaceComponent implements OnInit {
   groups: MeetupGroup[] = [];
   displayEvents: boolean = false;
+  currentGroupId: number = undefined;
   currentEvents: MeetupEvent[] = [];
 
   constructor(private groupService: GroupService) {}
 
   ngOnInit(): void {
-    this.groupService
-      .getGroups()
-      .subscribe((g: MeetupGroup[]) => (this.groups = g));
+    this.getGroups();
   }
 
   showEvents(groupId: number): void {
     this.groupService.getEvents(groupId).subscribe((events: MeetupEvent[]) => {
       this.currentEvents = events;
+      this.currentGroupId = groupId;
       this.displayEvents = true;
     });
+  }
+
+  updateGroup(groupId: number): void {
+    this.groupService.updateGroup(groupId).subscribe((g) => {
+      this.getGroups();
+      if (this.displayEvents && this.currentGroupId == groupId)
+        this.showEvents(groupId);
+    });
+  }
+
+  getGroups(): void {
+    this.groupService
+      .getGroups()
+      .subscribe((g: MeetupGroup[]) => (this.groups = g));
   }
 }
