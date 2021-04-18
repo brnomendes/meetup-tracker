@@ -7,7 +7,7 @@ import { MeetupEvent, MeetupGroup } from '../models/meetup';
   providedIn: 'root',
 })
 export class GroupService {
-  url = `http://${process.env.BACKEND_HOST}:${process.env.BACKEND_PORT}/groups`;
+  url = `https://brnomendes-meetup-backend.herokuapp.com/groups`;
 
   constructor(private httpClient: HttpClient) {}
 
