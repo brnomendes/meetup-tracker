@@ -1,0 +1,22 @@
+::ng-deep .p-card {
+  width: 300px;
+}
+
+:host ::ng-deep .p-scrollpanel {
+  height: 150px;
+  width: 100%;
+
+  .p-scrollpanel-bar {
+    background-color: var(--primary-color);
+    opacity: 1;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: var(--blue-700);
+    }
+  }
+}
+
+::ng-deep .p-button {
+  margin-left: 0.5em;
+}

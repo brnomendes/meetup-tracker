@@ -1,0 +1,5 @@
+<p-dataView #dataView [value]="groups" emptyMessage="" layout="grid">
+  <ng-template let-group pTemplate="gridItem">
+    <group class="group" [group]="group"></group>
+  </ng-template>
+</p-dataView>

@@ -1,0 +1,20 @@
+<p-card
+  header="{{ group.name }}"
+  subheader="{{ group.member_count }} Members"
+  styleClass="p-card-shadow"
+>
+  <ng-template pTemplate="header">
+    <img alt="Card" src="{{ group.photo_link }}" />
+  </ng-template>
+
+  <p-scrollPanel><div [innerHTML]="group.description"></div></p-scrollPanel>
+
+  <ng-template pTemplate="footer">
+    <p-button label="Open" icon="pi pi-check"></p-button>
+    <p-button
+      label="Events"
+      icon="pi pi-times"
+      styleClass="p-button-secondary"
+    ></p-button>
+  </ng-template>
+</p-card>

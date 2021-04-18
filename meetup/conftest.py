@@ -1,22 +1,12 @@
 import pytest
 from rest_framework.test import APIClient
-from rest_framework_api_key.models import APIKey
 
 from tracker.models import City, Country, GroupUrlname, Location, MeetupGroup
 
 
 @pytest.fixture
-def api_key():
-    key = APIKey.objects.create(name="Test")
-    api_key = APIKey.objects.assign_key(key)
-    key.save()
-    return api_key
-
-
-@pytest.fixture
 def api_client(api_key):
     client = APIClient()
-    client.credentials(HTTP_AUTHORIZATION=f"Api-Key {api_key}")
     return client
 
 
