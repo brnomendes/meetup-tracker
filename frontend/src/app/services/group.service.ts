@@ -7,7 +7,7 @@ import { MeetupEvent, MeetupGroup } from '../models/meetup';
   providedIn: 'root',
 })
 export class GroupService {
-  url = 'http://localhost:8000/groups';
+  url = `http://${process.env.BACKEND_HOST}:${process.env.BACKEND_PORT}/groups`;
 
   constructor(private httpClient: HttpClient) {}
 
