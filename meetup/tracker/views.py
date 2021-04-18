@@ -3,7 +3,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 
 from tracker.integration.client_api import UpdateMeetupGroup
-from tracker.models import Location, MeetupGroup
+from tracker.models import Location, MeetupEvent, MeetupGroup
 from tracker.serializers import LocationSerializer, MeetupEventSerializer, MeetupGroupSerializer
 
 
@@ -30,6 +30,7 @@ class MeetupEventList(generics.ListAPIView):
     View that list MeetupEvent models by group id.
     """
 
+    queryset = MeetupEvent.objects.all()
     serializer_class = MeetupEventSerializer
 
     def get(self, request, pk, *args, **kwargs):
