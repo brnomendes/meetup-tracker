@@ -8,5 +8,8 @@ import { MeetupEvent } from 'src/app/models/meetup';
 })
 export class EventsComponent {
   @Input() events: MeetupEvent[];
-  constructor() {}
+
+  goToLink(url: string): void {
+    window.open(url, '_blank');
+  }
 }

@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from './../../environments/environment';
 import { MeetupEvent, MeetupGroup } from '../models/meetup';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroupService {
-  url = `https://brnomendes-meetup-backend.herokuapp.com/groups`;
+  url = `${environment.backend}/groups`;
 
   constructor(private httpClient: HttpClient) {}
 

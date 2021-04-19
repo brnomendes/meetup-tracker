@@ -4,23 +4,34 @@
   styleClass="p-card-shadow"
 >
   <ng-template pTemplate="header">
-    <img alt="Card" src="{{ group.photo_link }}" />
+    <img class="group-image" src="{{ group.photo_link }}" />
   </ng-template>
 
   <p-scrollPanel><div [innerHTML]="group.description"></div></p-scrollPanel>
 
   <ng-template pTemplate="footer">
-    <p-button label="Open" icon="pi pi-check"></p-button>
-    <p-button
-      label="Update"
-      icon="pi pi-check"
-      (click)="updateGroupData()"
-    ></p-button>
-    <p-button
-      label="Events"
-      icon="pi pi-times"
-      styleClass="p-button-secondary"
-      (click)="openEvents()"
-    ></p-button>
+    <span class="p-buttonset">
+      <button
+        pButton
+        label="Open"
+        icon="pi pi-external-link"
+        (click)="goToLink(group.link)"
+        class="p-button-sm"
+      ></button>
+      <button
+        pButton
+        label="Events"
+        icon="pi pi-calendar"
+        (click)="openEvents()"
+        class="p-button-sm"
+      ></button>
+      <button
+        pButton
+        label="Sync"
+        icon="pi pi-refresh"
+        (click)="updateGroupData()"
+        class="p-button-sm"
+      ></button>
+    </span>
   </ng-template>
 </p-card>

@@ -1,12 +1,12 @@
 ::ng-deep .p-card {
-  width: 300px;
+  width: 290px;
 }
 
 :host ::ng-deep .p-scrollpanel {
-  height: 150px;
+  max-height: 100px;
   width: 100%;
 }
 
-::ng-deep .p-button {
-  margin-left: 0.5em;
+.group-image {
+  height: 150px;
 }

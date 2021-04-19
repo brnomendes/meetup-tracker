@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  backend: 'https://brnomendes-meetup-backend.herokuapp.com',
 };

@@ -1,21 +1,22 @@
-<div class="p-grid" style="height: 100%; width: 100%">
-  <div class="p-col">
-    <p-scrollPanel>
-      <p-dataView #dataView [value]="groups" emptyMessage="" layout="grid">
-        <ng-template let-group pTemplate="gridItem">
-          <group
-            class="group"
-            [group]="group"
-            (showEvents)="showEvents($event)"
-            (updateGroup)="updateGroup($event)"
-          ></group>
-        </ng-template>
-      </p-dataView>
-    </p-scrollPanel>
-  </div>
-  <div class="p-col" *ngIf="displayEvents">
-    <p-scrollPanel>
-      <events [events]="currentEvents"></events>
-    </p-scrollPanel>
-  </div>
-</div>
+<p-dataView [value]="groups" emptyMessage="" layout="grid">
+  <ng-template let-group pTemplate="gridItem">
+    <group
+      class="group"
+      [group]="group"
+      (showEvents)="showEvents($event)"
+      (updateGroup)="updateGroup($event)"
+    ></group>
+  </ng-template>
+</p-dataView>
+
+<p-dialog
+  header="{{ currentEventsGroup ? currentEventsGroup.name : '' }} Events"
+  [(visible)]="displayEvents"
+  [modal]="true"
+  [style]="{ width: '30vw', height: '30vw' }"
+>
+  <events [events]="currentEvents"></events>
+</p-dialog>
+
+<p-toast></p-toast>
+<p-toast position="top-left" key="tl"></p-toast>

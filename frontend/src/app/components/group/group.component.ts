@@ -8,17 +8,23 @@ import { MeetupGroup } from 'src/app/models/meetup';
 })
 export class GroupComponent implements OnInit {
   @Input() group: MeetupGroup;
-  @Output() showEvents: EventEmitter<number> = new EventEmitter<number>();
-  @Output() updateGroup: EventEmitter<number> = new EventEmitter<number>();
+  @Output()
+  showEvents: EventEmitter<MeetupGroup> = new EventEmitter<MeetupGroup>();
+  @Output()
+  updateGroup: EventEmitter<MeetupGroup> = new EventEmitter<MeetupGroup>();
   constructor() {}
 
   ngOnInit(): void {}
 
   openEvents(): void {
-    this.showEvents.emit(this.group.id);
+    this.showEvents.emit(this.group);
   }
 
   updateGroupData(): void {
-    this.updateGroup.emit(this.group.id);
+    this.updateGroup.emit(this.group);
+  }
+
+  goToLink(url: string): void {
+    window.open(url, '_blank');
   }
 }

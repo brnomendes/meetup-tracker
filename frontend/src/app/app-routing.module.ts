@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WorkspaceComponent } from './components/workspace/workspace.component';
 
-const routes: Routes = [
-  { path: '', component: WorkspaceComponent }
-];
+const routes: Routes = [{ path: '', component: WorkspaceComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -11,8 +11,14 @@ import { CardModule } from 'primeng/card';
 import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { SidebarModule } from 'primeng/sidebar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MenubarModule } from 'primeng/menubar';
+import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
 import { TimelineModule } from 'primeng/timeline';
-import { SplitterModule } from 'primeng/splitter';
+import { TagModule } from 'primeng/tag';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -29,10 +35,15 @@ import { SplitterModule } from 'primeng/splitter';
     DataViewModule,
     ButtonModule,
     ScrollPanelModule,
+    SidebarModule,
+    BrowserAnimationsModule,
+    MenubarModule,
+    ToastModule,
+    DialogModule,
     TimelineModule,
-    SplitterModule,
+    TagModule,
   ],
-  providers: [GroupService],
+  providers: [GroupService, MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
