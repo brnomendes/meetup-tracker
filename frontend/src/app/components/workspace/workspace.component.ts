@@ -26,14 +26,17 @@ export class WorkspaceComponent implements OnInit {
   }
 
   showEvents(group: MeetupGroup): void {
+    this.spinner.show();
     this.groupService.getEvents(group.id).subscribe(
       (events: MeetupEvent[]) => {
         this.currentEventsGroup = group;
         this.currentEvents = events;
         this.currentEvents.sort((a, b) => b.time - a.time);
+        this.spinner.hide();
         this.displayEvents = true;
       },
       () => {
+        this.spinner.hide();
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
@@ -55,12 +58,12 @@ export class WorkspaceComponent implements OnInit {
         });
       },
       () => {
+        this.spinner.hide();
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
           detail: `Failed to synchronize group ${group.name} data with meetup.com`,
         });
-        this.spinner.hide();
       }
     );
   }
@@ -72,12 +75,12 @@ export class WorkspaceComponent implements OnInit {
         this.spinner.hide();
       },
       () => {
+        this.spinner.hide();
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
           detail: 'Failed to load groups data',
         });
-        this.spinner.hide();
       }
     );
   }
