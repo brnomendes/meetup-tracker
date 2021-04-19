@@ -19,6 +19,8 @@ import { DialogModule } from 'primeng/dialog';
 import { TimelineModule } from 'primeng/timeline';
 import { TagModule } from 'primeng/tag';
 import { MessageService } from 'primeng/api';
+import { TooltipModule } from 'primeng/tooltip';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { MessageService } from 'primeng/api';
     DialogModule,
     TimelineModule,
     TagModule,
+    NgxSpinnerModule,
+    TooltipModule,
   ],
   providers: [GroupService, MessageService],
   bootstrap: [AppComponent],

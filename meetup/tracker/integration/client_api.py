@@ -2,15 +2,18 @@ from threading import Thread
 
 import requests
 from django.core.exceptions import ObjectDoesNotExist
+
 from tracker.models import City, Country, Location, MeetupEvent, MeetupGroup
 
 
 class UpdateMeetupGroup(Thread):
     API_URL = "https://api.meetup.com"
+    EVENT_STATUS = ["past", "upcoming"]
 
     def __init__(self, group_urlname):
         Thread.__init__(self)
         self._group_urlname = group_urlname
+        self._group_url = f"{self.API_URL}/{self._group_urlname.urlname}"
 
     def run(self):
         self.update_group()
@@ -19,7 +22,7 @@ class UpdateMeetupGroup(Thread):
         """
         Updates the group and events model with the data from the Meetup API.
         """
-        response = requests.get(f"{self.API_URL}/{self._group_urlname.urlname}")
+        response = requests.get(self._group_url)
         if response.status_code != 200:
             return
         content = response.json()
@@ -27,9 +30,11 @@ class UpdateMeetupGroup(Thread):
         self._update_events(group)
 
     def _update_events(self, group):
-        """"""
+        """
+        Updates the events model with the data from the Meetup API.
+        """
         response = requests.get(
-            f"{self.API_URL}/{self._group_urlname.urlname}/events?status=past,upcoming"
+            f"{self._group_url}/events", params={"status": ",".join(self.EVENT_STATUS)}
         )
         if response.status_code != 200:
             return

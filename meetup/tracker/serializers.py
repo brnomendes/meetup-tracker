@@ -1,6 +1,6 @@
-from conftest import location
 from rest_framework import serializers
 
+from conftest import location
 from tracker.models import City, Country, GroupUrlname, Location, MeetupEvent, MeetupGroup
 
 

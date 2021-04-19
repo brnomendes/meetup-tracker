@@ -5,7 +5,7 @@ from tracker.models import City, Country, GroupUrlname, Location, MeetupGroup
 
 
 @pytest.fixture
-def api_client(api_key):
+def api_client():
     client = APIClient()
     return client
 

@@ -1,0 +1,15 @@
+[tool.black]
+line_length = 99
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 99
+
+[tool.pytest.ini_options]
+addopts = "-s --cache-clear --cov-report term:skip-covered --cov-fail-under=94 --cov=tracker --cov=meetup"
+DJANGO_SETTINGS_MODULE = "meetup.settings"
+python_files = "tests.py test_*.py *_tests.py"

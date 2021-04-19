@@ -1,16 +1,17 @@
-<p-dataView [value]="groups" emptyMessage="" layout="grid">
+<p-dataView [value]="groups" emptyMessage="No Groups Found" layout="grid">
   <ng-template let-group pTemplate="gridItem">
     <group
       class="group"
       [group]="group"
       (showEvents)="showEvents($event)"
       (updateGroup)="updateGroup($event)"
+      [style]="{ margin: '10px' }"
     ></group>
   </ng-template>
 </p-dataView>
 
 <p-dialog
-  header="{{ currentEventsGroup ? currentEventsGroup.name : '' }} Events"
+  header="{{ currentEventsGroup?.name }} Events"
   [(visible)]="displayEvents"
   [modal]="true"
   [style]="{ width: '30vw', height: '30vw' }"
@@ -20,3 +21,11 @@
 
 <p-toast></p-toast>
 <p-toast position="top-left" key="tl"></p-toast>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="white"
+  type="ball-spin-clockwise"
+>
+</ngx-spinner>

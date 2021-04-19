@@ -43,7 +43,9 @@ class MeetupEventList(generics.ListAPIView):
 
 
 class MeetupUpdate(generics.ListAPIView):
-    """"""
+    """
+    View to synchronize a group data with meetup.com.
+    """
 
     def get(self, request, pk, *args, **kwargs):
         try:
